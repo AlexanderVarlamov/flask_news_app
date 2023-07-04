@@ -7,7 +7,7 @@ version
 """
 import requests
 
-from conf import backend_ip, backend_port, api_name
+from conf import backend_ip, backend_port, api_name, frontend_port, frontend_ip
 from jinja2 import Environment, FileSystemLoader
 
 
@@ -28,7 +28,11 @@ def get_raw_news_json(key: str):
             links_json.update({key: links})
 
     print(links_json)
-    context = {"sources": links_json}
+    return links_json
+
+
+def render_webpage(links_json: dict) -> str:
+    context = {"sources": links_json, "frontend_ip": frontend_ip, "frontend_port": frontend_port}
     env = Environment(loader=FileSystemLoader("templates/"))
     template = env.get_template("news.template")
     results = template.render(context)

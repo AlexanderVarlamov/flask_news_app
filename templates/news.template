@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Последние новости</title>
+    <link rel="stylesheet" href="/static/main.css">
 </head>
 <body>
     {% for key in sources.keys() %}
         <h2>{{ key }}</h2>
-        <p>
+        <p style="margin-left:20px">
             {% for news in sources[key] %}
             {{ news }}
             <br>
             {% endfor %}
         </p>
     {% endfor %}
+    <br>
+    <a href="http://{{ frontend_ip }}:{{ frontend_port }}">На главную</a>
 </body>
 </html>

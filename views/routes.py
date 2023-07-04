@@ -6,10 +6,8 @@ version
 @time 16:31
 """
 from flask import render_template, request
-from conf import *
-import requests
 
-from controllers.req_processors import get_raw_news_json
+from controllers.req_processors import get_raw_news_json, render_webpage
 
 
 def main_page():
@@ -19,4 +17,5 @@ def main_page():
 
 def process_sources():
     key = request.form['list_of_sources']
-    return get_raw_news_json(key)
+    raw_json = get_raw_news_json(key)
+    return render_webpage(raw_json)
